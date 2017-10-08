@@ -17,6 +17,8 @@
 		22401C031F84B137004AE39E /* Comp4097Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22401C021F84B137004AE39E /* Comp4097Tests.swift */; };
 		22401C0E1F84B137004AE39E /* Comp4097UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22401C0D1F84B137004AE39E /* Comp4097UITests.swift */; };
 		22401C1C1F84C013004AE39E /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22401C1B1F84C013004AE39E /* HomeTableViewController.swift */; };
+		226B031D1F8A52E200FAC271 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B031C1F8A52E200FAC271 /* Property.swift */; };
+		226B031F1F8A698300FAC271 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B031E1F8A698300FAC271 /* DetailTableViewController.swift */; };
 		22A4CF57A09945EDF8388F42 /* Pods_Comp4097.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D978205F3AE76EFE33976AB /* Pods_Comp4097.framework */; };
 		25E3B874309531761E21BD3D /* Pods_Comp4097Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFED09D1351C30BC599BDB6D /* Pods_Comp4097Tests.framework */; };
 /* End PBXBuildFile section */
@@ -56,6 +58,8 @@
 		22401C0D1F84B137004AE39E /* Comp4097UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comp4097UITests.swift; sourceTree = "<group>"; };
 		22401C0F1F84B137004AE39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22401C1B1F84C013004AE39E /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		226B031C1F8A52E200FAC271 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		226B031E1F8A698300FAC271 /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		27C1F9E0D38DE827A20E254C /* Pods-Comp4097.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Comp4097.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Comp4097/Pods-Comp4097.debug.xcconfig"; sourceTree = "<group>"; };
 		2DB1AC8BACBAC3CF88468593 /* Pods-Comp4097.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Comp4097.release.xcconfig"; path = "Pods/Target Support Files/Pods-Comp4097/Pods-Comp4097.release.xcconfig"; sourceTree = "<group>"; };
 		4F65413B719D7922D41C2DED /* Pods-Comp4097UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Comp4097UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Comp4097UITests/Pods-Comp4097UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 				22401BF61F84B136004AE39E /* LaunchScreen.storyboard */,
 				22401BF91F84B137004AE39E /* Info.plist */,
 				22401C1B1F84C013004AE39E /* HomeTableViewController.swift */,
+				226B031C1F8A52E200FAC271 /* Property.swift */,
+				226B031E1F8A698300FAC271 /* DetailTableViewController.swift */,
 			);
 			path = Comp4097;
 			sourceTree = "<group>";
@@ -472,6 +478,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				226B031F1F8A698300FAC271 /* DetailTableViewController.swift in Sources */,
+				226B031D1F8A52E200FAC271 /* Property.swift in Sources */,
 				22401C1C1F84C013004AE39E /* HomeTableViewController.swift in Sources */,
 				22401BF01F84B136004AE39E /* SecondViewController.swift in Sources */,
 				22401BEC1F84B136004AE39E /* AppDelegate.swift in Sources */,

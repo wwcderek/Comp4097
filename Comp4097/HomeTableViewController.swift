@@ -10,11 +10,54 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import RealmSwift
-class HomeTableViewController: UITableViewController {
 
+class HomeTableViewController: UITableViewController {
+    var firedJson:JSON?;
+    var realmResults:Results<Property>?
+    var estate:String?;
+    var name:String?;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let url = 
+        let realm = try! Realm()
+        realmResults = realm.objects(Property.self)
+        self.tableView.reloadData()
+        let url = "http://localhost:1337/"
+        
+        
+        Alamofire.request(url, method: .get).validate().responseJSON { response in
+            
+            print("Result: \(response.result)") // response serialization result
+            
+            switch response.result {
+                
+            case .success(let value):
+                
+                // print("JSON: \(value)") // serialized json response
+                
+                let json = JSON(value)
+                realm.beginWrite()
+                
+                for (index,subJson):(String, JSON) in json {
+                    let entry: Property = Property(JSONString: subJson.rawString()!)!
+                    realm.add(entry, update: true)
+                    print(index);
+                }
+                
+                do {
+                    try realm.commitWrite()
+                } catch {
+                }
+                
+                self.realmResults = realm.objects(Property.self)
+
+                //print("A record: \(self.firedJson?[0]["name"].stringValue ?? "No Data" )")
+                //print("A record: \(self.firedJson?[0]["imageurl"].stringValue ?? "No Data" )")
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -31,12 +74,18 @@ class HomeTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
+    
+    
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        if let results = realmResults {
+            return results.count
+        } else {
+            return 0
+        }
     }
 
     /*
@@ -48,6 +97,38 @@ class HomeTableViewController: UITableViewController {
         return cell
     }
     */
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath)
+        
+        // Configure the cell...
+        
+        if let cellImage = cell.viewWithTag(100) as? UIImageView {
+            
+            let firedUrl = realmResults?[indexPath.row].image
+            
+            if let url = firedUrl {
+                
+                Alamofire.request(url).responseData {
+                    response in
+                    
+                    if let data = response.result.value {
+                        cellImage.image = UIImage(data: data, scale:1)
+                    }
+                }
+            }
+            
+        }
+        if let cellLabel = cell.viewWithTag(101) as? UILabel {
+            cellLabel.text = realmResults?[indexPath.row].estate
+            estate = realmResults?[indexPath.row].estate
+        }
+        
+        if let cellLabel2 = cell.viewWithTag(102) as? UILabel {
+            cellLabel2.text = realmResults?[indexPath.row].name        }
+        
+        return cell
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -93,5 +174,21 @@ class HomeTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "showDetail" {
+            
+            if let viewController = segue.destination as? DetailTableViewController {
+                
+               // var selectedIndex = tableView.indexPathForSelectedRow!
+                
+                viewController.estate = estate!
+                
+            }
+        }
+    }
 
 }
