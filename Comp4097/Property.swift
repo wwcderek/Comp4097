@@ -8,6 +8,12 @@ class Property: Object, Mappable {
     dynamic var name = ""
     dynamic var image = ""
     dynamic var estate = ""
+    dynamic var garea = 0
+    dynamic var rent = 0
+    dynamic var bedrooms = 0
+    dynamic var tenants = 0
+    dynamic var createdAt = ""
+    dynamic var updatedAt = ""
     
     required convenience init?(map: Map) {
         self.init()
@@ -18,6 +24,12 @@ class Property: Object, Mappable {
         name <- map["name"]
         image <- map["imageurl"]
         estate <- map["estate"]
+        garea <- map["garea"]
+        rent <- map["rent"]
+        bedrooms <- map["bedrooms"]
+        tenants <- map["tenants"]
+        createdAt <- map["createdAt"]
+        updatedAt <- map["updatedAt"]
     }
     
     override class func primaryKey() -> String? {

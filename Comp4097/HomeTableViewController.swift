@@ -14,8 +14,6 @@ import RealmSwift
 class HomeTableViewController: UITableViewController {
     var firedJson:JSON?;
     var realmResults:Results<Property>?
-    var estate:String?;
-    var name:String?;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,7 +119,6 @@ class HomeTableViewController: UITableViewController {
         }
         if let cellLabel = cell.viewWithTag(101) as? UILabel {
             cellLabel.text = realmResults?[indexPath.row].estate
-            estate = realmResults?[indexPath.row].estate
         }
         
         if let cellLabel2 = cell.viewWithTag(102) as? UILabel {
@@ -182,10 +179,29 @@ class HomeTableViewController: UITableViewController {
         if segue.identifier == "showDetail" {
             
             if let viewController = segue.destination as? DetailTableViewController {
+                var selectedIndex = tableView.indexPathForSelectedRow!
                 
-               // var selectedIndex = tableView.indexPathForSelectedRow!
+                viewController.realmResults = realmResults
+             
+                viewController.number = selectedIndex[1]
+
+//                if let estate = realmResults?[selectedIndex[1]].estate {
+//                   viewController.estate = estate
+//                }
+//                
+//                if let name = realmResults?[selectedIndex[1]].name {
+//                    viewController.name = name
+//                }
+//                
+//                if let image = realmResults?[selectedIndex[1]].image {
+//                    viewController.image = image
+//                }
                 
-                viewController.estate = estate!
+                
+                
+//                print(realmResults?[selectedIndex[1]].estate);
+//                print(selectedIndex);
+//                viewController.estate = estate!
                 
             }
         }

@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import RealmSwift
 
 class DetailTableViewController: UITableViewController {
-    var estate:String = "No Data"
+    var number = 0
+    var realmResults:Results<Property>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = estate
+        self.title = realmResults?[number].estate
+        self.tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,12 +35,12 @@ class DetailTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1
     }
 
     /*
@@ -46,6 +52,55 @@ class DetailTableViewController: UITableViewController {
         return cell
     }
     */
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath)
+        
+        // Configure the cell...
+        
+        if let cellImage = cell.viewWithTag(100) as? UIImageView {
+            
+            let firedUrl = realmResults?[number].image
+            
+            if let url = firedUrl {
+                
+                Alamofire.request(url).responseData {
+                    response in
+                    
+                    if let data = response.result.value {
+                        cellImage.image = UIImage(data: data, scale:1)
+                    }
+                }
+            }
+            
+        }
+        
+        if let cellLabel = cell.viewWithTag(101) as? UILabel {
+            cellLabel.text = "Garea: " + String(describing: (realmResults?[number].garea)!)
+        }
+        
+        if let cellLabel2 = cell.viewWithTag(102) as? UILabel {
+            cellLabel2.text = "Rent: " + String(describing: (realmResults?[number].rent)!)       }
+        
+        if let cellLabel3 = cell.viewWithTag(103) as? UILabel {
+            cellLabel3.text = "Badrooms: " + String(describing: (realmResults?[number].bedrooms)!)       }
+        
+        if let cellLabel4 = cell.viewWithTag(104) as? UILabel {
+            cellLabel4.text = "Excepted Tenants: " + String(describing: (realmResults?[number].tenants)!)     }
+        
+        if let cellLabel5 = cell.viewWithTag(105) as? UILabel {
+            cellLabel5.text =  realmResults?[number].name       }
+        
+        if let cellLabel6 = cell.viewWithTag(106) as? UILabel {
+            cellLabel6.text =  "Create Date: " + (realmResults?[number].createdAt)!      }
+        
+        if let cellLabel7 = cell.viewWithTag(107) as? UILabel {
+            cellLabel7.text =  "Updated Date: " + (realmResults?[number].updatedAt)!      }
+        
+        return cell
+    }
+    
+  
 
     /*
     // Override to support conditional editing of the table view.
