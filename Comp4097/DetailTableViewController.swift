@@ -146,5 +146,22 @@ class DetailTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "showMap" {
+            
+            if let viewController = segue.destination as? MapViewController {
+               
+                
+                viewController.realmResults = realmResults
+                
+                viewController.number = number
+                
+                
+            }
+        }
+    }
 
 }

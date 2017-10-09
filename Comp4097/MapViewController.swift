@@ -8,23 +8,37 @@
 
 import UIKit
 import MapKit
+import Alamofire
+import SwiftyJSON
+import RealmSwift
 
 class MapViewController: UIViewController {
-
+    var number = 0
+    var realmResults:Results<Property>?
+    
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+          let initialLocation = CLLocation(latitude: Double((realmResults?[number].latitude)!)!, longitude: Double((realmResults?[number].longitude)!)!)
+       
         
         // set initial location in HKBU
-        let initialLocation = CLLocation(latitude: 22.3380838, longitude: 114.18186)
+//        let initialLocation = CLLocation(latitude: 22.370174, longitude: 114.175935)
         
         let regionRadius: CLLocationDistance = 300
         
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(
             initialLocation.coordinate, regionRadius * 2.0, regionRadius * 2.0)
+        
+        let destination = MKPointAnnotation()
+        
+        destination.coordinate = CLLocationCoordinate2D(latitude: Double((realmResults?[number].latitude)!)!, longitude: Double((realmResults?[number].longitude)!)!)
+        destination.title = realmResults?[number].estate
+        destination.subtitle = realmResults?[number].name 
+        
+        mapView.addAnnotation(destination)
         
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.showsUserLocation = true
