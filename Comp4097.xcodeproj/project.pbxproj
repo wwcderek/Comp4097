@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A0621D03A49A5414FAD7446 /* Pods_Comp4097UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C2A5B4688C171E3AE845B8 /* Pods_Comp4097UITests.framework */; };
+		2222961D1F8BBF2C00B2D830 /* InfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222961C1F8BBF2C00B2D830 /* InfoTableViewController.swift */; };
 		22401BEC1F84B136004AE39E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22401BEB1F84B136004AE39E /* AppDelegate.swift */; };
 		22401BEE1F84B136004AE39E /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22401BED1F84B136004AE39E /* FirstViewController.swift */; };
 		22401BF01F84B136004AE39E /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22401BEF1F84B136004AE39E /* SecondViewController.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		0D978205F3AE76EFE33976AB /* Pods_Comp4097.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Comp4097.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		15B24889345F2E6A9C8B7DD4 /* Pods-Comp4097Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Comp4097Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Comp4097Tests/Pods-Comp4097Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		2222961C1F8BBF2C00B2D830 /* InfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTableViewController.swift; sourceTree = "<group>"; };
 		22401BE81F84B136004AE39E /* Comp4097.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Comp4097.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22401BEB1F84B136004AE39E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22401BED1F84B136004AE39E /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				226B031C1F8A52E200FAC271 /* Property.swift */,
 				226B031E1F8A698300FAC271 /* DetailTableViewController.swift */,
 				22BBAF4F1F8B47A700DBC990 /* MapViewController.swift */,
+				2222961C1F8BBF2C00B2D830 /* InfoTableViewController.swift */,
 			);
 			path = Comp4097;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				226B031F1F8A698300FAC271 /* DetailTableViewController.swift in Sources */,
 				226B031D1F8A52E200FAC271 /* Property.swift in Sources */,
 				22401C1C1F84C013004AE39E /* HomeTableViewController.swift in Sources */,
+				2222961D1F8BBF2C00B2D830 /* InfoTableViewController.swift in Sources */,
 				22401BF01F84B136004AE39E /* SecondViewController.swift in Sources */,
 				22401BEC1F84B136004AE39E /* AppDelegate.swift in Sources */,
 				22401BEE1F84B136004AE39E /* FirstViewController.swift in Sources */,
