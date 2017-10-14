@@ -15,13 +15,26 @@ import RealmSwift
 class MapViewController: UIViewController {
     var number = 0
     var realmResults:Results<Property>?
-    
+    var results:Results<Estates>?
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-          let initialLocation = CLLocation(latitude: Double((realmResults?[number].latitude)!)!, longitude: Double((realmResults?[number].longitude)!)!)
+        let config = Realm.Configuration(
+            // Get the URL to the bundled file
+            fileURL: Bundle.main.url(forResource: "privateEstates", withExtension: "realm"),
+            // Open the file in read-only mode as application bundles are not writeable
+            readOnly: true)
+        
+        // Open the Realm with the configuration
+        let value = String(describing: (realmResults?[number].estate)!)
+        let realm = try! Realm(configuration: config)
+        results = realm.objects(Estates.self).filter("Name = %@",value)
+       // print("First record is \((results?[0].Name)!)");
+        print((results?[0].Name)!)
+        
+          let initialLocation = CLLocation(latitude: Double((results?[0].Latitude)!), longitude: Double((results?[0].Longitude)!))
        
         
         // set initial location in HKBU
@@ -34,7 +47,7 @@ class MapViewController: UIViewController {
         
         let destination = MKPointAnnotation()
         
-        destination.coordinate = CLLocationCoordinate2D(latitude: Double((realmResults?[number].latitude)!)!, longitude: Double((realmResults?[number].longitude)!)!)
+        destination.coordinate = CLLocationCoordinate2D(latitude: Double((results?[0].Latitude)!), longitude: Double((results?[0].Longitude)!))
         destination.title = realmResults?[number].estate
         destination.subtitle = realmResults?[number].name 
         

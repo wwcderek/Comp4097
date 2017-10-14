@@ -13,19 +13,43 @@ import RealmSwift
 
 class DetailTableViewController: UITableViewController {
     var number = 0
+    var id = 0;
     var realmResults:Results<Property>?
-    
+    var property:Property?
+    var firedJson:JSON?;
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = realmResults?[number].estate
-        self.tableView.reloadData()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        
+        //self.title = realmResults?[number].estate
+//        realmResults2 = realm.objects(Property.self)
+        print("id is \(self.id)");
+        let url = "http://localhost:1337/property/detail?id=\(self.id)"
+        //self.tableView.reloadData()
+        
+        Alamofire.request(url, method: .get).validate().responseJSON { response in
+            
+            // print("Result: \(response.result)") // response serialization result
+            
+            switch response.result {
+                
+            case .success(let value):
+                
+         
+                let json = JSON(value)
+                
+                self.property = Property(JSONString: json.rawString()!)!
+                let num = self.property?.estate
+                print(num!)
+                
+                self.title = self.property?.estate
+        
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -60,7 +84,7 @@ class DetailTableViewController: UITableViewController {
         
         if let cellImage = cell.viewWithTag(100) as? UIImageView {
             
-            let firedUrl = realmResults?[number].image
+            let firedUrl = self.property?.image
             
             if let url = firedUrl {
                 
@@ -74,28 +98,35 @@ class DetailTableViewController: UITableViewController {
             }
             
         }
-        
-        if let cellLabel = cell.viewWithTag(101) as? UILabel {
-            cellLabel.text = "Garea: " + String(describing: (realmResults?[number].garea)!)
+        if let cellLabel2 = cell.viewWithTag(102) as? UILabel {
+            cellLabel2.text = "Rent: " + String(describing: self.property?.rent)
         }
         
+        if let cellLabel = cell.viewWithTag(101) as? UILabel {
+            cellLabel.text = "Garea: " + String(describing: self.property?.garea)
+        }
+////
         if let cellLabel2 = cell.viewWithTag(102) as? UILabel {
-            cellLabel2.text = "Rent: " + String(describing: (realmResults?[number].rent)!)       }
-        
+            cellLabel2.text = "Rent: " + String(describing: self.property?.rent)     }
+//
         if let cellLabel3 = cell.viewWithTag(103) as? UILabel {
-            cellLabel3.text = "Badrooms: " + String(describing: (realmResults?[number].bedrooms)!)       }
-        
+            cellLabel3.text = "Badrooms: " + String(describing: self.property?.bedrooms)
+        }
+//
         if let cellLabel4 = cell.viewWithTag(104) as? UILabel {
-            cellLabel4.text = "Excepted Tenants: " + String(describing: (realmResults?[number].tenants)!)     }
-        
+            cellLabel4.text = "Excepted Tenants: " + String(describing: self.property?.tenants)
+        }
+//
         if let cellLabel5 = cell.viewWithTag(105) as? UILabel {
-            cellLabel5.text =  realmResults?[number].name       }
-        
+            cellLabel5.text =  self.property?.name
+       }
+//
         if let cellLabel6 = cell.viewWithTag(106) as? UILabel {
-            cellLabel6.text =  "Create Date: " + (realmResults?[number].createdAt)!      }
+            cellLabel6.text =  "Create Date: " + String(describing: self.property?.createdAt)
+      }
         
         if let cellLabel7 = cell.viewWithTag(107) as? UILabel {
-            cellLabel7.text =  "Updated Date: " + (realmResults?[number].updatedAt)!      }
+            cellLabel7.text =  "Updated Date: " + String(describing: self.property?.updatedAt)    }
         
         return cell
     }
@@ -157,7 +188,7 @@ class DetailTableViewController: UITableViewController {
                 
                 viewController.realmResults = realmResults
                 
-                viewController.number = number
+                viewController.number = number 
                 
                 
             }

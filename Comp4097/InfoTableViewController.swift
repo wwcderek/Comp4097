@@ -9,12 +9,14 @@
 import UIKit
 
 class InfoTableViewController: UITableViewController {
-    let data = [["2 Bedrooms -", "3 Bedrooms +"], ["2 Bedrooms -", "3 Bedrooms +"]]
+    var data = [["2 Bedrooms -", "3 Bedrooms +"], ["2 Bedrooms -", "3 Bedrooms +"]]
     let headerTitles = ["$15000 -", "$15000 +"]
     var valueToPass:String!
     var number:Int!
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+  
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -58,6 +60,8 @@ class InfoTableViewController: UITableViewController {
         
         return cell
     }
+    
+
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,5 +117,29 @@ class InfoTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "showSelection" {
+            
+            if let viewController = segue.destination as? SelectionTableViewController {
+                var selectedIndex = tableView.indexPathForSelectedRow!
+                let currentCell = tableView.cellForRow(at: selectedIndex)! as UITableViewCell
+                
+//                valueToPass = currentCell.textLabel?.text
+//                viewController.number = Int(selectedIndex[0])
+//                viewController.value = valueToPass
+                
+                
+                if(currentCell.textLabel?.text?.caseInsensitiveCompare("2 Bedrooms -") == ComparisonResult.orderedSame) {
+                    viewController.value = 2;
+                } else {
+                    viewController.value = 3;
+                }
+                viewController.number = Int(selectedIndex[0])
+            }
+        }
+    }
 
 }

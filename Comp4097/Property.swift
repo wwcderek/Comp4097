@@ -2,6 +2,7 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
+
 class Property: Object, Mappable {
     
     dynamic var id = 0
