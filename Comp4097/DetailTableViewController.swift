@@ -17,6 +17,36 @@ class DetailTableViewController: UITableViewController {
     var realmResults:Results<Property>?
     var property:Property?
     var firedJson:JSON?;
+    var url = "";
+    @IBAction func bt_click(_ sender: Any) {
+       print("see?")
+        url = "http://localhost:1337/property/interestedProperty?id=\(self.id)"
+        Alamofire.request(url, method: .get)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    self.firedJson = JSON(value)
+                    let alertController = UIAlertController(title: "Title", message: String(describing: self.firedJson!), preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                case .failure(let error):
+                    print(error)
+                }
+        }
+    
+    
+    
+    
+    
+//        let alertController = UIAlertController(title: "Title", message: "Are you sure? Declare Interest on this property", preferredStyle: .alert)
+//        alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+//        alertController.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+//        let url = "http://localhost:1337/property/detail?id=\(self.id)"
+//        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
