@@ -20,7 +20,7 @@ class DetailTableViewController: UITableViewController {
     var url = "";
     @IBAction func bt_click(_ sender: Any) {
        print("see?")
-        url = "http://localhost:1337/property/interestedProperty?id=\(self.id)"
+        url = "https://mighty-caverns-73776.herokuapp.com/property/interestedProperty?id=\(self.id)"
         Alamofire.request(url, method: .get)
             .responseJSON { response in
                 switch response.result {
@@ -53,7 +53,7 @@ class DetailTableViewController: UITableViewController {
         //self.title = realmResults?[number].estate
 //        realmResults2 = realm.objects(Property.self)
         print("id is \(self.id)");
-        let url = "http://localhost:1337/property/detail?id=\(self.id)"
+        let url = "https://mighty-caverns-73776.herokuapp.com/property/detail?id=\(self.id)"
         //self.tableView.reloadData()
         
         Alamofire.request(url, method: .get).validate().responseJSON { response in

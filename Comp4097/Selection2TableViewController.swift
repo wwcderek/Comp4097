@@ -29,7 +29,7 @@ class Selection2TableViewController: UITableViewController {
         realmResults = realm.objects(Property.self)
         self.tableView.reloadData()
         
-        url = "http://localhost:1337/"
+        url = "https://mighty-caverns-73776.herokuapp.com/"
         
         Alamofire.request(url, method: .get).validate().responseJSON { response in
             print("Result: \(response.result)") // response serialization result

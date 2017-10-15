@@ -32,7 +32,7 @@ class SelectionTableViewController: UITableViewController {
         let realm = try! Realm()
         realmResults = realm.objects(Property.self)
     
-       url = "http://localhost:1337/property/selection?rent=\(number)&category=\(value)"
+       url = "https://mighty-caverns-73776.herokuapp.com/property/selection?rent=\(number)&category=\(value)"
         Alamofire.request(url, method: .get).validate().responseJSON { response in
             print("Result: \(response.result)") // response serialization result
             switch response.result {

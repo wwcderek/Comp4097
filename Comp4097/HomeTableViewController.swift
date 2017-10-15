@@ -20,7 +20,7 @@ class HomeTableViewController: UITableViewController {
         let realm = try! Realm()
         realmResults = realm.objects(Property.self)
         self.tableView.reloadData()
-        let url = "http://localhost:1337/"
+        let url = "https://mighty-caverns-73776.herokuapp.com/"
         
         
         Alamofire.request(url, method: .get).validate().responseJSON { response in

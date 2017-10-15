@@ -23,7 +23,7 @@ class InterestedTableViewController: UITableViewController {
         
         super.viewDidLoad()
         for index in 1...4 {
-        url = "http://localhost:1337/property/showInterestedUser?id=\(index)"
+        url = "https://mighty-caverns-73776.herokuapp.com/property/showInterestedUser?id=\(index)"
             Alamofire.request(url, method: .get)
                 .responseJSON { response in
                     switch response.result {

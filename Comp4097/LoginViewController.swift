@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonClicked(_ sender: Any) {
         let parameters : Parameters = ["userid": userid.text!, "password": password.text!]
         
-        url = "http://localhost:1337/user/login?name=\(userid.text!)&password=\(password.text!)"
+        url = "https://mighty-caverns-73776.herokuapp.com/user/login?name=\(userid.text!)&password=\(password.text!)"
         
         Alamofire.request(url, method: .get)
             .responseJSON { response in
@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func showClick(_ sender: Any) {
-        url = "http://localhost:1337/property/interestedList"
+        url = "https://mighty-caverns-73776.herokuapp.com/property/interestedList"
             
         
     }
